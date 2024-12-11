@@ -1,31 +1,33 @@
-<form [formGroup]="formgroup">
+<form [formGroup]="formgroup" (ngSubmit)="onsubmit()">
 
     <input type="text" class="form-control" placeholder="enter username" name="Username" formControlName="username">
     <div *ngIf="formgroup.get('username')?.invalid && formgroup.get('username')?.touched">
         <small *ngIf="formgroup.get('username')?.errors?.['required']">Username is required</small>
-        <small *ngIf="formgroup.get('username')?.errors?.['minLength(3)']">username must contain 3 characters</small>
+        <small *ngIf="formgroup.get('username')?.errors?.['minlength']">username must contain 3 characters</small>
     </div>
 
     <input type="email" class="form-control" placeholder="enter email" name="email" formControlName="email" id="email">
     <div *ngIf="formgroup.get('email')?.invalid && formgroup.get('email')?.touched">
-        <small *ngIf="formgroup.get('email')?.errors?.['required']">Email is required</small>
+        <small *ngIf="formgroup.get('email')?.errors?.['required']">email is required</small>
         <small *ngIf="formgroup.get('email')?.errors?.['email']">email is required</small>
     </div>
 
     <input type="password" class="form-control" placeholder="enter your password" name="password" formControlName="password">
     <div *ngIf="formgroup.get('password')?.invalid && formgroup.get('password')?.touched">
         <small *ngIf="formgroup.get('password')?.errors?.['required']">password is required</small>
-        <small *ngIf="formgroup.get('password')?.errors?.['minLength(8)']">password should contain minimum characters</small>
-        <small *ngIf="formgroup.get('password')?.errors?.['maxLength(15)']">password exceeded 15 characters</small> 
+        <small *ngIf="formgroup.get('password')?.errors?.['minlength']">password should contain minimum characters</small>
+        <small *ngIf="formgroup.get('password')?.errors?.['maxlength']">password exceeded 15 characters</small>
     </div>
 
-    <input type="number" class="form-control" placeholder="enter phone number" name="phonenumber"
+    <input type="tel" class="form-control" placeholder="enter phone number" name="phonenumber"
         formControlName="phonenumber">
     <div *ngIf="formgroup.get('phonenumber')?.invalid && formgroup.get('phonenumber')?.touched">
         <small *ngIf="formgroup.get('phonenumber')?.errors?.['required']">phone number is required</small>
-        <small *ngIf="formgroup.get('phonenumber')?.errors?.['minLength(10)']">phone number must contain 10
+        <small *ngIf="formgroup.get('phonenumber')?.errors?.['minlength']">phone number must contain 10
             characters</small>
-        <small *ngIf="formgroup.get('phonenumber')?.errors?.['maxLength(11)']">phone number is exceeded 10
+        <small *ngIf="formgroup.get('phonenumber')?.errors?.['maxlength']">phone number is exceeded 10
             digits</small>
     </div>
+
+    <button type="submit" [disabled]="formgroup.invalid">submit</button>
 </form>
